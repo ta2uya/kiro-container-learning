@@ -1,0 +1,20 @@
+# ベースイメージを指定（Node.js環境）
+FROM node:18-alpine
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# package.jsonをコピー（依存関係のインストール用）
+COPY package*.json ./
+
+# 依存関係をインストール
+RUN npm install
+
+# アプリケーションのソースコードをコピー
+COPY . .
+
+# アプリケーションが使用するポートを公開
+EXPOSE 3000
+
+# コンテナ起動時に実行するコマンド
+CMD ["npm", "start"]
